@@ -41,16 +41,26 @@
     <div class="title">
         <h2>Add a new product</h2>
     </div>
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            Product successfully created!
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
 
-    <form>
+    {% endif %}
+
+    <form method="post" action="/add_product">
         <div class="mb-3">
             <label for="pname" class="col-sm-2 col-form-label">Product Name</label>
-            <input type="text" class="form-control" id="pname" placeholder="e.g. Zinus">
+            <input type="text" class="form-control" id="pname" name="pname" placeholder="e.g. Zinus" required=true>
         </div>
         <div class="mb-3">
             <label for="ptype" class="col-sm-2 col-form-label">Product Type</label>
-            <select class="form-select" id="ptype" required='true'>
-                <option selected>Choose from the list</option>
+            <select class="form-select" id="ptype" name="ptype" required>
+                <option value="">Choose from the list</option>
                 <option value="bed">Bed</option>
                 <option value="chairs">Chairs</option>
                 <option value="decoration">Decoration</option>
@@ -58,16 +68,19 @@
                 <option value="storage">Storage</option>
                 <option value="tables">Tables</option>
                 <option value="electronics">Electronics</option>
-                <option value="other">Kitchen</option>
+                <option value="electronics">Kitchenware</option>
+                <option value="other">Other</option>
             </select>
         </div>
         <div class="mb-3">
             <label for="retailer_link" class="col-sm-2 col-form-label">Retailer Link</label>
-            <input type="url" class="form-control" id="retailer_link" placeholder="Retailer link (optional)">
+            <input type="url" class="form-control" id="retailer_link" name="retailer_link"
+                   placeholder="Retailer link (optional)">
         </div>
         <div class="mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" placeholder="e.g. &#10;Almost new. &#10;Size: 33 inch x 25 inch."></textarea>
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"
+                      placeholder="e.g. &#10;Almost new. &#10;Size: 33 inch x 25 inch."></textarea>
         </div>
         {#        <div class="mb-3">#}
         {#            <label for="price" class="col-sm-2 col-form-label">Price</label>#}
@@ -75,14 +88,15 @@
         {#                <input type="number" class="form-control" id="price" placeholder="Price e.g 17.38" aria-describedby="basic-addon1">#}
         {#        </div>#}
 
-            <label for="price" class="col-sm-2 col-form-label">Price</label>
+        <label for="price" class="col-sm-2 col-form-label">Price</label>
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            <input type="number" class="form-control" id="price" placeholder="Price (round to nearest integer)">
+            <input type="number" class="form-control" id="price" name="price"
+                   placeholder="Price (round up to nearest integer)" required=true>
         </div>
         <div class="mb-3">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Add</button>
+                <input type="submit" class="btn btn-primary" value="Add"></input>
             </div>
         </div>
     </form>

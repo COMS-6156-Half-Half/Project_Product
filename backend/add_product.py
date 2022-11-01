@@ -10,23 +10,31 @@ def show():
         return render_template('add_product.html')
     # photo = request.form['photo']
     description = request.form['description']
-    price = request.form['price']
+    price = int(request.form['price'])
     pname = request.form['pname'].lower()
+    ptype = request.form['ptype']
+    print("ptype is:", ptype)
+    retailer_link = request.form['retailer_link']
+    print("retailer link is:", retailer_link)
+    if price <=0:
+        return render_template('add_product.html', success=False, message="Price should be at least $1.")
 
-    if description and price and pname:
+    if ptype and price and pname:
         try:
             new_product = Products(
                 # photo = photo,
-                description = description,
-                price = price,
-                pname = pname,
+                description=description,
+                price=price,
+                pname=pname,
+                ptype=ptype,
+                retailer_link=retailer_link
             )
             db.session.add(new_product)
             db.session.commit()
         except sqlalchemy.exc.IntegrityError:
             return redirect(url_for('add_product.show') + '?error=pid-exists')
         #can add a flash notice of "successfully add" on the page
-        return redirect(url_for('add_product.show') + '?success=product_added')
+        return render_template('add_product.html',success=True)
     else:
         return redirect(url_for('add_product.show') + '?success=missing-fields')
 
