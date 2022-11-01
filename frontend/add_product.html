@@ -1,96 +1,98 @@
-<!-- author ben lawson (balawson@bu.edu) -->
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Product</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <style>
-        *{box-sizing: border-box;
-            font-family: 'Roboto Mono', monospace;}
-        a{
-            font-size: calc(5px + 0.8vw);
-            color: #b75036;
-        }
-        a:hover {
-            color: #deb344;
-            text-decoration: none;
-        }
-        nav li{
-            margin: 0.5vh 1.5em;
-            padding: 0.5vh 0;
-            box-sizing: border-box;
-            width: 80%;
-            font-size: 15px;
-            display: inline;
-            text-align: center;
-        }
-        nav ul {
-            padding-inline-start: 0;
-            margin-block-start: 0;
-            margin:auto;
-            margin: 3vh 1vw;
-            text-align:center;
-		    box-sizing:border-box;
-            border-bottom: solid gray(1) 5px;
-        }
-        nav a {
-            color: #5aa7e8;
-            font-size: calc(4px + 1vw);
-        }
-        nav a:hover {
-            color: #81e0e0;
-            text-decoration: none;
-        }
-        nav{
-            border-bottom: solid gray(1) 5px;
-
-        }
-        .photos{
-            border: double 8px darkred;
-            padding: 2vh 3vw;
-        }
-        h3.caption , h3.tag{border-bottom: dashed dimgrey 2px;
-            margin: 0;
-        }
-        h3.caption{
-            text-align: center;
-        }
-
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-    <body>
-    <nav>
-        <ul>
-            <li> <a href="/search_product/Mattress"> Search Mattress</a></li>
-            <li> <a href="/search_product/Bed frame"> Search Bed frame</a></li>
-            <li> <a href="/get_product/1"> Detail page of pid=1</a></li>
-            <li> <a href="/add_product"> Add product</a></li>
-            <li> <a href='/'>Home</a></li>
-        </ul>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">Half & Half</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search_product/Mattress">Search Mattress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search_product/Bed frame"> Search Bed frame</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/get_product/1"> Detail page of pid=1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_product"> Add product</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <hr>
-        <div class="title">
-            <h2>Add a new product</h2>
+    <div class="title">
+        <h2>Add a new product</h2>
+    </div>
+
+    <form>
+        <div class="mb-3">
+            <label for="pname" class="col-sm-2 col-form-label">Product Name</label>
+            <input type="text" class="form-control" id="pname" placeholder="e.g. Zinus">
         </div>
-            <form method="post" enctype="multipart/form-data" action="/add_product">
-                <label for="pname">Product Name:</label>
-                <input type="text" name="pname" required='true'><br />
+        <div class="mb-3">
+            <label for="ptype" class="col-sm-2 col-form-label">Product Type</label>
+            <select class="form-select" id="ptype" required='true'>
+                <option selected>Choose from the list</option>
+                <option value="bed">Bed</option>
+                <option value="chairs">Chairs</option>
+                <option value="decoration">Decoration</option>
+                <option value="lighting">Lighting</option>
+                <option value="storage">Storage</option>
+                <option value="tables">Tables</option>
+                <option value="electronics">Electronics</option>
+                <option value="other">Kitchen</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="retailer_link" class="col-sm-2 col-form-label">Retailer Link</label>
+            <input type="url" class="form-control" id="retailer_link" placeholder="Retailer link (optional)">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" placeholder="e.g. &#10;Almost new. &#10;Size: 33 inch x 25 inch."></textarea>
+        </div>
+        {#        <div class="mb-3">#}
+        {#            <label for="price" class="col-sm-2 col-form-label">Price</label>#}
+        {#                <span class="input-group-text">$</span>#}
+        {#                <input type="number" class="form-control" id="price" placeholder="Price e.g 17.38" aria-describedby="basic-addon1">#}
+        {#        </div>#}
 
-{#                <label for="photo">Select photo:</label>#}
-{#                <input type="file" name="photo" required='true' /><br />#}
+            <label for="price" class="col-sm-2 col-form-label">Price</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control" id="price" placeholder="Price (round to nearest integer)">
+        </div>
+        <div class="mb-3">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </form>
 
-                <label for="description">Description:</label>
-                <input type="text" name="description" required='true' size="100" style="height:40px"/><br />
-
-                <label for="price">Price:</label>
-                <input type="text" name="price" required='true' /><br />
-                <sub style="margin:0;">Use the format(No spaces): 17.38</sub><br>
-                <input type="submit" value="Add">
-            </form>
-
-<hr>
-<p style="text-align: center"><a href="#top">Back to top</a></p>
+    <hr>
+    <p style="text-align: center"><a href="#top">Back to top</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 
