@@ -1,6 +1,6 @@
 from flask import Blueprint, url_for, render_template, redirect, request
 import sqlalchemy
-from models import db, Products
+from backend.models import db, Products
 get_product = Blueprint('get_product', __name__, template_folder='../frontend')
 
 
@@ -20,7 +20,7 @@ def show(pid):
         prod = Products.query.filter_by(pid = pid).first()
 
         if value == '1':
-            print('start delete')
+            print('start deleting the product:', prod)
             db.session.delete(prod)
             db.session.commit()
             print('success delete')

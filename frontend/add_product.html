@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
@@ -22,18 +23,17 @@
                         <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/search_product/Mattress">Search Mattress</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/search_product/Bed frame"> Search Bed frame</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/get_product/1"> Detail page of pid=1</a>
+                        <a class="nav-link" href="/search_product/all"> Get all products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/add_product"> Add product</a>
                     </li>
                 </ul>
+                <form class="d-flex" role="search" method="post" action="/search">
+                    <input class="form-control me-2" type="search" placeholder="Product Name" aria-label="Search"
+                           name="pname">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
         </div>
     </nav>
@@ -41,11 +41,11 @@
     <div class="title">
         <h2>Add a new product</h2>
     </div>
-    {% if success %}
+    {% if success==True %}
         <div class="alert alert-success" role="alert">
             Product successfully created!
         </div>
-    {% else %}
+    {% elif success==False %}
         <div class="alert alert-danger" role="alert">
             {{ message }}
         </div>
@@ -76,6 +76,11 @@
             <label for="retailer_link" class="col-sm-2 col-form-label">Retailer Link</label>
             <input type="url" class="form-control" id="retailer_link" name="retailer_link"
                    placeholder="Retailer link (optional)">
+        </div>
+        <div class="mb-3">
+            <label for="location" class="col-sm-2 col-form-label">Pickup location</label>
+            <input type="text" class="form-control" id="location" name="location"
+                   placeholder="e.g. 540 W 114th St">
         </div>
         <div class="mb-3">
             <label for="description" class="col-sm-2 col-form-label">Description</label>
