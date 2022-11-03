@@ -5,9 +5,9 @@ from flaskext.mysql import MySQL
 from backend.models import db, Products
 from backend.add_product import add_product
 from backend.get_product import get_product
-from backend.search_pname import search_pname
+from backend.search_product import search_product
 from backend.search_ptype import search_ptype
-from backend.search_box import search_box
+
 
 import flask_login
 from datetime import datetime
@@ -25,12 +25,12 @@ db.init_app(application)
 application.app_context().push()
 
 application.register_blueprint(add_product)
-application.register_blueprint(search_pname)#if error: AttributeError:'function' object has no attribute 'register'
+application.register_blueprint(search_product)#if error: AttributeError:'function' object has no attribute 'register'
 application.register_blueprint(search_ptype)#change the function name inside .py file: function name cannot have same name as Blueprint name
 # application.register_blueprint(get_all_products)
 # application.register_blueprint(show)
 application.register_blueprint(get_product)
-application.register_blueprint(search_box)
+
 
 
 
