@@ -19,8 +19,11 @@ application = Flask(__name__)
 # mysql = MySQL()
 application.secret_key = 'super secret string'  # Change this!
 
+UPLOAD_FOLDER = 'static/uploads/'
 
-application.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///../backend/database.db"
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+application.config['SQLALCHEMY_DATABASE_URI'] ="mysql+pymysql://root:13886003474cjw@e61561.cwsqeuuovxq1.us-east-1.rds.amazonaws.com:3306/product"
 db.init_app(application)
 application.app_context().push()
 
