@@ -1,8 +1,15 @@
+import os.path
+
 from flask import Blueprint, url_for, render_template, redirect, request
 import sqlalchemy
 from backend.models import db, Products
 
+import base64
+
 add_product = Blueprint('add_product', __name__, template_folder='../frontend')
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 @add_product.route('/add_product', methods=['GET', 'POST'])
@@ -18,6 +25,21 @@ def show():
     location = request.form['location']
     print("ptype is:", ptype)
     retailer_link = request.form['retailer_link']
+
+    img_file = request.files['image']
+    img_file = base64.b64encode(img_file.read())
+
+    # print(img_file.size)
+    #
+    # try:
+    #     print(request.files['image'].filename)
+    #     img_file = request.files['image']
+    #     if img_file:
+    #         print('received image')
+    # except:
+    #     img_file = None
+    #     print('image failed')
+
     print("retailer link is:", retailer_link)
     if price <= 0:
         return render_template('add_product.html', success=False, message="Price should be at least $1.")
@@ -31,7 +53,8 @@ def show():
                 pname=pname,
                 ptype=ptype,
                 location=location,
-                retailer_link=retailer_link
+                retailer_link=retailer_link,
+                image = img_file
             )
             db.session.add(new_product)
             db.session.commit()

@@ -1,6 +1,8 @@
 from flask import Blueprint, url_for, render_template, redirect, request
 import sqlalchemy
 from backend.models import db, Products
+import base64
+
 get_product = Blueprint('get_product', __name__, template_folder='../frontend')
 
 
@@ -8,9 +10,17 @@ get_product = Blueprint('get_product', __name__, template_folder='../frontend')
 def show(pid):
     print('====== pid ======')
     print(pid)
+
     if request.method == 'GET':
         #check pid in db
-        return render_template('get_product.html', pid=pid)
+        prod = Products.query.filter_by(pid=pid).first()
+
+        try:
+            image = prod.image.decode('ascii')
+        except:
+            image = None
+
+        return render_template('get_product.html', pid=pid, prod = prod, image = image)
     else:
         value = request.form['distinction']
 
