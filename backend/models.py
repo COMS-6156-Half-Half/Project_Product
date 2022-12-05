@@ -9,8 +9,9 @@ class Products(db.Model):
     location = db.Column(db.String(100))
     price = db.Column(db.Integer)
     ptype = db.Column(db.String(100))
-    retailer_link = db.Column(db.String(255))
+    retailer_link = db.Column(db.String(500))
 
+    image = db.Column(LargeBinary(length=(2**32)-1))
     # def __init__ (self, db.Model):
     #     pid = db.Column(db.Integer, primary_key = True)
     #     pname = db.Column(db.String(100))
