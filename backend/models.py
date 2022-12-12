@@ -11,8 +11,11 @@ class Products(db.Model):
     price = db.Column(db.Integer)
     ptype = db.Column(db.String(100))
     retailer_link = db.Column(db.String(500))
-
+    seller_id = db.Column(db.Integer)
     image = db.Column(LargeBinary(length=(2**32)-1))
+
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
     # def __init__ (self, db.Model):
     #     pid = db.Column(db.Integer, primary_key = True)
     #     pname = db.Column(db.String(100))
