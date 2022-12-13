@@ -4,11 +4,11 @@ import json
 from backend.models import db, Products
 
 
-class BytesEncoder(json.JSONEncoder):
-  def default(self, obj):
-    if isinstance(obj, bytes):
-      return obj.decode('utf-8')
-    return json.JSONEncoder.default(self, obj)
+# class BytesEncoder(json.JSONEncoder):
+#   def default(self, obj):
+#     if isinstance(obj, bytes):
+#       return obj.decode('utf-8')
+#     return json.JSONEncoder.default(self, obj)
 
 search_product = Blueprint('search_product', __name__, template_folder='../frontend')
 # search_box = Blueprint('search_box', __name__, template_folder='../frontend')
@@ -24,19 +24,19 @@ def search_box():
       result.append(Products.as_dict(prod))
 
     # return render_template('search_pname.html', product_list=product_list, pname=pname)
-    return Response(json.dumps(result, cls=BytesEncoder), status=200, content_type="application/json")
+    return Response(json.dumps(result), status=200, content_type="application/json")
 
 @search_product.route('/search_product/', methods=['GET'])
 @search_product.route('/search_product', methods=['GET'])
 def get_all_product():
     product_list = Products.query.all()
-    print("Returning all products",product_list)
+    # print("Returning all products",product_list)
     result = []
     for prod in product_list:
       result.append(Products.as_dict(prod))
 
     # return render_template('search_pname.html', product_list=product_list, pname=pname)
-    return Response(json.dumps(result, cls=BytesEncoder), status=200, content_type="application/json")
+    return Response(json.dumps(result), status=200, content_type="application/json")
     # return render_template('search_pname.html', product_list=product_list, pname="all products on sale")
 
 @search_product.route('/search_product/<pname>')
@@ -51,6 +51,6 @@ def search_by_name(pname):
       result.append(Products.as_dict(prod))
 
     # return render_template('search_pname.html', product_list=product_list, pname=pname)
-    return Response(json.dumps(result, cls=BytesEncoder), status=200, content_type="application/json")
+    return Response(json.dumps(result), status=200, content_type="application/json")
 
 
