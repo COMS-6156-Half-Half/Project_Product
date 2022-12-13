@@ -31,7 +31,7 @@ def show(pid):
             "price": prod.price,
             "ptype": prod.ptype,
             "retailer_link": prod.retailer_link,
-            "image": image,
+            # "image": image,
           }],
           "links": [{"rel": "self", "href": "/get_product/1"}, {"rel":"type", "href":"/search_ptype/"+prod.ptype}]
 
