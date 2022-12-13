@@ -4,12 +4,6 @@ import json
 from backend.models import db, Products
 
 
-# class BytesEncoder(json.JSONEncoder):
-#   def default(self, obj):
-#     if isinstance(obj, bytes):
-#       return obj.decode('utf-8')
-#     return json.JSONEncoder.default(self, obj)
-
 search_product = Blueprint('search_product', __name__, template_folder='../frontend')
 # search_box = Blueprint('search_box', __name__, template_folder='../frontend')
 
@@ -30,7 +24,6 @@ def search_box():
 @search_product.route('/search_product', methods=['GET'])
 def get_all_product():
     product_list = Products.query.all()
-    # print("Returning all products",product_list)
     result = []
     for prod in product_list:
       result.append(Products.as_dict(prod))

@@ -12,7 +12,7 @@ class Products(db.Model):
     ptype = db.Column(db.String(100))
     retailer_link = db.Column(db.String(500))
     seller_id = db.Column(db.Integer)
-    image = db.Column(LargeBinary(length=(2**32)-1))
+    # image = db.Column(LargeBinary(length=(2**32)-1))
 
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
