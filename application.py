@@ -7,6 +7,7 @@ from backend.add_product import add_product
 from backend.get_product import get_product
 from backend.search_product import search_product
 from backend.search_ptype import search_ptype
+from backend.seller_product import seller_product
 
 
 import flask_login
@@ -33,6 +34,7 @@ application.register_blueprint(search_ptype)#change the function name inside .py
 # application.register_blueprint(get_all_products)
 # application.register_blueprint(show)
 application.register_blueprint(get_product)
+application.register_blueprint(seller_product)
 
 
 
