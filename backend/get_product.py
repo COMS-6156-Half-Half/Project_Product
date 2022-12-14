@@ -42,10 +42,13 @@ def show(pid):
     else:
         prod = Products.query.filter_by(pid = pid).first()
 
-        print('start deleting the product:', prod)
-        db.session.delete(prod)
-        db.session.commit()
-        print('success delete')
-        return Response("Product successfully deleted", status=200, content_type="text/plain")
+        if prod:
+            print('start deleting the product:', prod)
+            db.session.delete(prod)
+            db.session.commit()
+            print('success delete')
+            return Response("Product successfully deleted", status=200, content_type="text/plain")
+        else:
+            return Response("Deletion Failed: Product NOT FOUND", status = 404, content_type="text/plain")
 
     # return str(product_detail[0])

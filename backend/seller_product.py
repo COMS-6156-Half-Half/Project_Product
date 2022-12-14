@@ -10,8 +10,17 @@ seller_product = Blueprint('seller_product', __name__, template_folder='../front
 
 @seller_product.route('/seller_product/<uid>', methods=['GET'])
 def show(uid):
-  product_list = Products.query.filter_by(seller_id=uid).all()
+  try:
+    product_list = Products.query.filter_by(seller_id=uid).all()
+  except:
+    product_list = None
+
   result = []
+
   for prod in product_list:
     result.append(Products.as_dict(prod))
-  return Response(json.dumps(result), status=200, content_type="application/json")
+
+  if result == [] or len(result) == 0:
+    return Response("Current seller has no product on sale.", status = 404, content_type="text/plain")
+  else:
+    return Response(json.dumps(result), status=200, content_type="application/json")

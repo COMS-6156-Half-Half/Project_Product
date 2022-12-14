@@ -5,12 +5,6 @@ from backend.models import db, Products
 
 search_ptype = Blueprint('search_ptype', __name__, template_folder='../frontend')
 
-class BytesEncoder(json.JSONEncoder):
-  def default(self, obj):
-    if isinstance(obj, bytes):
-      return obj.decode('utf-8')
-    return json.JSONEncoder.default(self, obj)
-
 
 @search_ptype.route('/search_ptype/<ptype>')
 def search_product(ptype):
@@ -23,5 +17,8 @@ def search_product(ptype):
       result.append(Products.as_dict(prod))
 
     # return render_template('search_pname.html', product_list=product_list, pname=pname)
-    return Response(json.dumps(result, cls=BytesEncoder), status=200, content_type="application/json")
+    if result == [] or len(result) == 0:
+      return Response("Current product type: NOT FOUND", status = 404, content_type="text/plain")
+    else:
+      return Response(json.dumps(result), status=200, content_type="application/json")
 

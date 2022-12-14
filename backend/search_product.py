@@ -19,7 +19,10 @@ def search_box():
     result.append(Products.as_dict(prod))
 
   # return render_template('search_pname.html', product_list=product_list, pname=pname)
-  return Response(json.dumps(result), status=200, content_type="application/json")
+  if result == [] or len(result) == 0:
+    return Response("Product you're searching: NOT FOUND", status = 404, content_type="text/plain")
+  else:
+    return Response(json.dumps(result), status=200, content_type="application/json")
 
 
 @search_product.route('/search_product/', methods=['GET'])
@@ -30,7 +33,10 @@ def get_all_product():
   for prod in product_list:
     result.append(Products.as_dict(prod))
 
-  return Response(json.dumps(result), status=200, content_type="application/json")
+  if result == [] or len(result) == 0:
+    return Response("There is no product on sale.", status = 404, content_type="text/plain")
+  else:
+    return Response(json.dumps(result), status=200, content_type="application/json")
   # return render_template('search_pname.html', product_list=product_list, pname="all products on sale")
 
 
@@ -43,4 +49,7 @@ def search_by_name(pname):
     result.append(Products.as_dict(prod))
 
   # return render_template('search_pname.html', product_list=product_list, pname=pname)
-  return Response(json.dumps(result), status=200, content_type="application/json")
+  if result == [] or len(result) == 0:
+    return Response("Product you're searching: NOT FOUND", status = 404, content_type="text/plain")
+  else:
+    return Response(json.dumps(result), status=200, content_type="application/json")
