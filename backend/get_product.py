@@ -40,22 +40,12 @@ def show(pid):
         # return render_template('get_product.html', pid=pid, prod = prod, image = image)
         return Response(json.dumps(result), status=200, content_type="application/json")
     else:
-        value = request.form['distinction']
-
-        print('-----')
-        print(value)
-
         prod = Products.query.filter_by(pid = pid).first()
 
-        if value == '1':
-            print('start deleting the product:', prod)
-            db.session.delete(prod)
-            db.session.commit()
-            print('success delete')
-            return render_template('index.html')
-        elif value == '2':
-            return
-
-        prod = Products.query.filter_by(pid = pid)
+        print('start deleting the product:', prod)
+        db.session.delete(prod)
+        db.session.commit()
+        print('success delete')
+        return Response("Product successfully deleted", status=200, content_type="text/plain")
 
     # return str(product_detail[0])
