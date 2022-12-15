@@ -63,6 +63,8 @@
     <div class="title">
         <h2>Product Detailed Page</h2>
     </div>
+    
+
 
     {% if prod == None %}
         <h3> Current product was removed or does not exist.</h3>
@@ -72,11 +74,6 @@
         <h3>Description: {{ prod.description }}</h3>
         <h3>Pickup Location: {{ prod.location }}</h3>
         <h3>Price: {{ prod.price }}</h3>
-
-{#        {% if image != None %}#}
-{#            <h3>Image: </h3>#}
-{#            <IMG SRC="data:image/gif;base64, {{ image }}" style="max-width: 30%; height: auto"/>#}
-{#        {% endif %}#}
 
         <form method="post" enctype="multipart/form-data" action="/get_product/{{ pid }}">
             <input type="hidden" name="distinction" value='1'>
