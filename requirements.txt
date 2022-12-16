@@ -4,3 +4,4 @@ werkzeug~=2.2.2
 Flask-Login
 flask-mysql
 flask_sqlalchemy
+smartystreets_python_sdk

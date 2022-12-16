@@ -7,6 +7,8 @@ from backend.models import db, Products
 
 import base64
 
+from check_address import check_address
+
 add_product = Blueprint('add_product', __name__, template_folder='../frontend')
 
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -27,6 +29,8 @@ def show():
       location = data['location']
       seller_id = data['seller_id']
       retailer_link = data['retailer_link']
+
+      valid_address = check_address(location)
 
       # description = request.form['description']
       # price = int(request.form['price'])
@@ -55,6 +59,11 @@ def show():
       if price <= 0:
           # return render_template('add_product.html', success=False, message="Price should be at least $1.")
           return Response("Price should be at least $1.", status=400, content_type="text/plain")
+      
+      if not valid_address:
+          # return render_template('add_product.html', success=False, message="Invalid address.")
+          return Response("Invalid Location.", status=400, content_type="text/plain")
+      
       if ptype and price and pname:
           try:
               new_product = Products(
