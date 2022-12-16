@@ -7,7 +7,7 @@ from backend.models import db, Products
 
 import base64
 
-from check_address import check_address
+from backend.check_address import check_address
 
 add_product = Blueprint('add_product', __name__, template_folder='../frontend')
 

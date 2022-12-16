@@ -18,9 +18,6 @@ def show(pid):
     # print(prod.pname)
     if prod == None:
       return Response("Sorry the product with pid= " + pid + " doesn't exist", status=404, content_type="text/plain")
-    elif prod.sold:
-      return Response("Product SOLD OUT", status=404, content_type="text/plain")
-
     # try:
     #     image = prod.image.decode('ascii')
     # except:
