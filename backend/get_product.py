@@ -44,14 +44,22 @@ def show(pid):
     return Response(json.dumps(result), status=200, content_type="application/json")
   else:
     prod = Products.query.filter_by(pid=pid).first()
-
-    if prod:
-      print('start deleting the product:', prod)
-      db.session.delete(prod)
-      db.session.commit()
-      print('success delete')
-      return Response("Product successfully deleted", status=200, content_type="text/plain")
+    if not prod:
+      return Response("Failed: Product NOT FOUND", status=404, content_type="text/plain")
     else:
-      return Response("Deletion Failed: Product NOT FOUND", status=404, content_type="text/plain")
+      data = request.get_json()
+      type = data['type']
+      if type == 'delete':
+        print('start deleting the product:', prod)
+        db.session.delete(prod)
+        db.session.commit()
+        print('success delete')
+        return Response("Product successfully deleted", status=200, content_type="text/plain")
+      elif type == 'purchase':
+        print('start purchasing the product: ', prod)
+        prod.sold = True
+        db.session.commit()
+        print('success purchase')
+        return Response("Product successfully purchased(sold=True)", status=200, content_type="text/plain")
 
   # return str(product_detail[0])
